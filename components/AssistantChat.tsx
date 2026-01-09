@@ -1,12 +1,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { askChef } from '../services/geminiService';
-import { ChatMessage } from '../types';
+import { ChatMessage, Recipe } from '../types';
 
-const AssistantChat: React.FC = () => {
+interface AssistantChatProps {
+  onAddRecipe: (recipe: Partial<Recipe>) => void;
+}
+
+const AssistantChat: React.FC<AssistantChatProps> = ({ onAddRecipe }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'assistant', content: '¡Hola! Soy tu asistente de cocina. ¿En qué receta puedo ayudarte hoy?' }
+    { role: 'assistant', content: '¡Hola! Soy tu asistente. Escríbeme cualquier receta que quieras añadir o pregúntame dudas.' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,8 +30,14 @@ const AssistantChat: React.FC = () => {
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsLoading(true);
 
-    const response = await askChef(userMsg);
-    setMessages(prev => [...prev, { role: 'assistant', content: response || 'No he podido procesar eso...' }]);
+    const result = await askChef(userMsg);
+    
+    setMessages(prev => [...prev, { role: 'assistant', content: result.text || 'No he podido procesar eso...' }]);
+    
+    if (result.newRecipe) {
+      onAddRecipe(result.newRecipe);
+    }
+    
     setIsLoading(false);
   };
 
@@ -79,13 +89,13 @@ const AssistantChat: React.FC = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Pregunta sobre las recetas..."
-                className="flex-grow px-4 py-2 bg-gray-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Escribe tu nueva receta aquí..."
+                className="flex-grow px-4 py-3 bg-gray-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <button 
                 onClick={handleSend}
                 disabled={isLoading}
-                className="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors disabled:opacity-50"
+                className="bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-colors disabled:opacity-50 shadow-md shadow-emerald-100"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -99,11 +109,12 @@ const AssistantChat: React.FC = () => {
           onClick={() => setIsOpen(true)}
           className="bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 group relative"
         >
+          <div className="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full border-2 border-white animate-pulse"></div>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>
-          <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-            ¿Necesitas ayuda?
+          <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap tracking-widest uppercase">
+            Añadir Receta
           </span>
         </button>
       )}
