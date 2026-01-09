@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import Header from './components/Header.tsx';
 import RecipeCard from './components/RecipeCard.tsx';
@@ -18,7 +17,7 @@ const App: React.FC = () => {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#fcfbf7] flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#d8dad0] flex flex-col selection:bg-emerald-100 selection:text-emerald-900 transition-colors duration-500">
       <Header />
       
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -50,8 +49,8 @@ const App: React.FC = () => {
         {filteredRecipes.length === 0 && (
           <div className="text-center py-40">
             <span className="text-9xl mb-8 block animate-pulse">🍲</span>
-            <p className="text-gray-400 font-black text-2xl uppercase tracking-widest">Receta no encontrada</p>
-            <p className="text-gray-300 mt-4 italic">Prueba con otros ingredientes o nombres</p>
+            <p className="text-gray-500 font-black text-2xl uppercase tracking-widest">Receta no encontrada</p>
+            <p className="text-gray-400 mt-4 italic">Prueba con otros ingredientes o nombres</p>
           </div>
         )}
       </main>
