@@ -1,10 +1,10 @@
 
 import React, { useState, useMemo } from 'react';
-import Header from './components/Header';
-import RecipeCard from './components/RecipeCard';
-import RecipeModal from './components/RecipeModal';
-import { RECIPES } from './recipesData';
-import { Recipe } from './types';
+import Header from './components/Header.tsx';
+import RecipeCard from './components/RecipeCard.tsx';
+import RecipeModal from './components/RecipeModal.tsx';
+import { RECIPES } from './recipesData.ts';
+import { Recipe } from './types.ts';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,7 +28,7 @@ const App: React.FC = () => {
               <div className="absolute inset-0 bg-emerald-100 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
               <input 
                 type="text" 
-                placeholder="Busca una receta..."
+                placeholder="Busca una receta entre tus delicias..."
                 className="relative block w-full px-8 py-6 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-xl font-medium placeholder:text-gray-300 text-center"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -51,7 +51,7 @@ const App: React.FC = () => {
           <div className="text-center py-40">
             <span className="text-9xl mb-8 block animate-pulse">🍲</span>
             <p className="text-gray-400 font-black text-2xl uppercase tracking-widest">Receta no encontrada</p>
-            <p className="text-gray-300 mt-4 italic">Prueba con otros ingredientes</p>
+            <p className="text-gray-300 mt-4 italic">Prueba con otros ingredientes o nombres</p>
           </div>
         )}
       </main>

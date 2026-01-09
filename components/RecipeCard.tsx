@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Recipe } from '../types';
+import { Recipe } from '../types.ts';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -16,14 +16,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onView }) => {
       onClick={() => onView(recipe)}
       className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full relative cursor-pointer"
     >
-      {/* Badge de tipo */}
       <div className={`absolute top-4 right-4 z-10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm ${
         isFresco ? 'bg-blue-50/90 text-blue-600 border border-blue-100' : 'bg-orange-50/90 text-orange-600 border border-orange-100'
       }`}>
         {isFresco ? '❄️ Fresco' : '🔥 Caliente'}
       </div>
 
-      {/* Imagen / Emoji */}
       <div className="relative h-64 flex items-center justify-center bg-gray-50 overflow-hidden group-hover:bg-emerald-50/30 transition-colors">
         {isEmoji ? (
           <span className="text-8xl transition-transform duration-700 group-hover:scale-125 select-none" role="img" aria-label={recipe.name}>
@@ -38,7 +36,6 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onView }) => {
         )}
       </div>
       
-      {/* Contenido */}
       <div className="p-8 flex flex-col flex-grow">
         <h3 className="text-2xl font-black text-gray-800 mb-4 leading-tight group-hover:text-emerald-600 transition-colors">
           {recipe.name}
