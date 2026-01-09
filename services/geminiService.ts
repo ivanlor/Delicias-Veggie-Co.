@@ -2,6 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { RECIPES } from "../recipesData";
 
+// La API Key se obtiene directamente de process.env.API_KEY
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
 export const askChef = async (query: string) => {
@@ -15,6 +16,8 @@ export const askChef = async (query: string) => {
         maxOutputTokens: 500,
       },
     });
+    
+    // Usamos directamente la propiedad .text del objeto de respuesta
     return response.text;
   } catch (error) {
     console.error("Error asking Gemini:", error);
