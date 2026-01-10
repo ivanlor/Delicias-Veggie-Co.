@@ -93,7 +93,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 12,
     name: "Zorza con Patatas Fritas",
-    ingredients: "200 gr de Soja Texturizada gruesa, 4 dientes de ajo, caldo de verduras, pimentón dulce y picante, laurel, salsa de soja, vino blanco, aove, orégano y patatas.",
+    ingredients: "200 gr de Soja Texturizada (cuanto más gruesa mejor), 4 dientes de ajo, caldo de verduras, 2 cucharas de pimentón dulce, un poco de pimentón picante, ajo, 2 hojas de laurel, 5 cucharas de salsa de soja, medio vaso de vino blanco, medio vaso de aove, 1 cucharada de orégano y sal.",
     instructions: "La noche antes: Hervir caldo de verduras y meter soja texturizada 15 min. Mezclar en bol soja, vino, aceite, ajo machacado, laurel, pimentón y sal. El día de cocinar, freír la soja marinada con las patatas.",
     image: "🥘",
     type: "caliente"
@@ -149,7 +149,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 19,
     name: "Fajitas",
-    ingredients: "Fajitas, Heura, alubias, tomate, aguacate, cebolla, limón, pimiento, especias (ajo, comino, cayena, cilantro).",
+    ingredients: "Fajitas, Heura, alubias, tomate natural, tomate frito, aguacate, 1 cebolla, un poco de limón, 1 pimiento, ajo en polvo, comino, pimienta cayena, cilantro, sal.",
     instructions: "Sofreír ajo, cebolla, pimiento y tomate. Añadir alubias y especias. Mezclar con la Heura. Salsa: triturar aguacate, tomate, limón y tomate frito.",
     image: "🌮",
     type: "caliente"
@@ -157,7 +157,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 20,
     name: "Carne Mechada",
-    ingredients: "200g tofu firme, media cebolla, ajo en polvo, cayena, salsa de soja, salsa barbacoa, agua.",
+    ingredients: "200g tofu firme, media cebolla, 1 cucharadita de ajo en polvo, media cdita cayena, 1 cda salsa de soja, 150g aprox salsa barbacoa, 100 ml agua.",
     instructions: "Caramelizar cebolla. Añadir tofu rallado y dorar. Añadir especias, soja, barbacoa y agua. Cocinar a fuego lento hasta que espese como carne mechada.",
     image: "🥙",
     type: "caliente"
@@ -165,7 +165,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 21,
     name: "Sobrasada",
-    ingredients: "120 gr de tomate seco, 150 gr de anacardos, aceite de los tomates, pimentón dulce/picante, ajo en polvo.",
+    ingredients: "120 gr de tomate seco, 150 gr de anacardos, aceite de los propios tomates, 1 cucharadita de pimentón dulce, 1 cucharadita de pimentón picante, 1 cucharadita de ajo en polvo, sal.",
     instructions: "Triturar todos los ingredientes en una batidora hasta obtener una pasta homogénea.",
     image: "🥪",
     type: "fresco"
@@ -173,7 +173,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 22,
     name: "Heura al limón",
-    ingredients: "Heura, ajo en polvo, pimienta, caldo de verduras, limón, soja, jengibre, maizena.",
+    ingredients: "Heura, ajo en polvo, pimienta, sal, 200 ml de caldo de verduras, 30 ml de zumo de limón, 30 ml de salsa de soja, media cucharada de jengibre, 1 cucharada de maizena diluida en medio vaso de agua.",
     instructions: "Dorar Heura con especias. Hacer salsa con caldo, limón, soja, jengibre y maizena diluida. Hervir y añadir la heura.",
     image: "🍋",
     type: "caliente"
@@ -181,7 +181,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 23,
     name: "Hamburguesas de lentejas y setas",
-    ingredients: "Lentejas, Avena, Cebolla, Ajo, Setas/Champiñones, Zanahoria, Harina de Garbanzo, especias.",
+    ingredients: "Lentejas, Avena (la mitad que las lentejas), Cebolla, Ajo, Setas Ostreatus o Champiñones Portobelo, 1 o 2 Zanahorias, Harina de Garbanzo, Pimienta, Orégano.",
     instructions: "Sofreír verduras y setas. Mezclar con harina de garbanzo (textura huevo). Triturar con lentejas cocidas, avena y especias. Formar hamburguesas.",
     image: "🍔",
     type: "caliente"
@@ -197,7 +197,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 25,
     name: "Salchichas",
-    ingredients: "Patata, zanahorias, alubias blancas, harina de garbanzo, pan rallado, ketchup, soja, especias.",
+    ingredients: "1 patata cocida, 2 zanahorias cocidas, 400 g de alubias cocidas, 70 g de harina de garbanzo, 100 g de pan rallado, 1 cucharada de ketchup, sal, pimienta 1 chorrito de salsa de soja y aove.",
     instructions: "Chafar verduras cocidas con alubias. Añadir ketchup, harina y pan rallado hasta que sea moldeable. Formar, freír y pincelar con soja.",
     image: "🌭",
     type: "caliente"
@@ -205,7 +205,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 26,
     name: "Carrot Cake",
-    ingredients: "2 plátanos, 200g avena, 1 zanahoria rallada, nueces, proteína (opcional), canela, levadura, leche vegetal.",
+    ingredients: "2 plátanos maduros, 240 g de copos de avena, 1 zanahoria rallada, 40 g de nueces troceadas, 90 g de proteína en polvo (opcional), 1 cucharadita de canela, 1 cucharadita de levadura, 400 ml de leche vegetal.",
     instructions: "Mezclar todo. Hornear 12 min a 180 grados. Enfriar 2 horas. Cubrir con yogur y nueces.",
     image: "🍰",
     type: "fresco"
@@ -213,7 +213,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 27,
     name: "Batido de Plátano y Chocolate",
-    ingredients: "200ml leche soja, 1 plátano, 4 onzas chocolate negro, chía, vainilla, lino.",
+    ingredients: "200 ml de leche de soja, 1 plátano maduro, 4 onzas de chocolate negro puro, 2 cucharadas de chía, media cucharadita de esencia de vainilla, media cucharadita de lino (opcional).",
     instructions: "Triturar todo muy bien. Dejar enfriar 2 horas para que las semillas hidraten.",
     image: "🥤",
     type: "fresco"
@@ -221,7 +221,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 28,
     name: "Tortilla Francesa Vegana",
-    ingredients: "300g tofu, 40g maizena, 40g harina garbanzo, levadura nutricional, cúrcuma, sal negra, bicarbonato.",
+    ingredients: "300 gr de tofu firme o blando, 40 g de maizena, 40 g de harina de garbanzo, 20 g de levadura nutricional, cúrcuma, pimienta negra, cebolla en polvo, 250 ml de agua, 2 g de bicarbonato, sal negra.",
     instructions: "Triturar todos los ingredientes con 250ml de agua. Cocinar en sartén como una tortilla normal.",
     image: "🍳",
     type: "caliente"
