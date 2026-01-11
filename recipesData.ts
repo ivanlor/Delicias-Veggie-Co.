@@ -1,4 +1,3 @@
-
 import { Recipe } from './types';
 
 export const RECIPES: Recipe[] = [
@@ -7,7 +6,7 @@ export const RECIPES: Recipe[] = [
     name: "Macarrones con Berenjena y Tofu Ahumado",
     ingredients: "Un paquete de tofu ahumado, berenjena, macarrones, nata de soja, pimentón dulce, soja, cebolla en polvo.",
     instructions: "La noche antes se deja el tofu con una cucharada de pimentón, 2 de soja, 1 de cebolla en polvo, 1 de ágave, 2 flis de aceite. Se dora ajo si se tiene, se echa la berenjena cortada en cuartos y luego se echa el tofu, se dora todo un poco y luego se echa un poco de nata. Luego se cuece la pasta.",
-    image: "🍝",
+    image: "https://i.ibb.co/bjsHSTXt/Screenshot-20260111-105713-Google.jpg",
     type: "caliente"
   },
   {
@@ -15,7 +14,7 @@ export const RECIPES: Recipe[] = [
     name: "Ensalada de Garbanzos",
     ingredients: "Garbanzos, tomate, queso fresco, huevo, quinoa, aguacate, ajo en polvo, aove y limón.",
     instructions: "Se mezcla todo.",
-    image: "🥗",
+    image: "https://i.ibb.co/RGTv2ZqY/1768125655064.png",
     type: "fresco"
   },
   {
@@ -23,7 +22,7 @@ export const RECIPES: Recipe[] = [
     name: "Ensalada de Lentejas",
     ingredients: "Lentejas, tomate, aguacate, burrata o mozzarella, mango, mostaza, limón, jengibre y aove.",
     instructions: "Se mezcla todo.",
-    image: "🥣",
+    image: "https://i.ibb.co/4nLGRzPj/1768125844135.png",
     type: "fresco"
   },
   {
@@ -31,7 +30,7 @@ export const RECIPES: Recipe[] = [
     name: "Legumbres con Boniato y Brócoli",
     ingredients: "Garbanzos o habas, boniato, brócoli, aove, ajo y jengibre.",
     instructions: "Se cuece y se sirve.",
-    image: "🍠",
+    image: "https://i.ibb.co/6R4ZbFwC/1768125982173.png",
     type: "caliente"
   },
   {
@@ -39,7 +38,7 @@ export const RECIPES: Recipe[] = [
     name: "Pasta con Soja Texturizada y Zanahoria",
     ingredients: "Pasta, soja texturizada, zanahorias, tomate frito y ajo.",
     instructions: "Se dora el ajo, luego se añade la zanahoria y la soja una vez hidratada se echa a la sartén. Se le echa también un chorrito de tomate frito.",
-    image: "🍝",
+    image: "https://i.ibb.co/7x61Dr9x/1768126175547.png",
     type: "caliente"
   },
   {
@@ -183,7 +182,7 @@ export const RECIPES: Recipe[] = [
     name: "Hamburguesas de lentejas y setas",
     ingredients: "Lentejas, Avena (la mitad que las lentejas), Cebolla, Ajo, Setas Ostreatus o Champiñones Portobelo, 1 o 2 Zanahorias, Harina de Garbanzo, Pimienta, Orégano.",
     instructions: "Sofreír verduras y setas. Mezclar con harina de garbanzo (textura huevo). Triturar con lentejas cocidas, avena y especias. Formar hamburguesas.",
-    image: "🍔",
+    image: "https://i.ibb.co/Hf8Gs8DZ/Screenshot-20260111-104835-Google.jpg",
     type: "caliente"
   },
   {
@@ -207,7 +206,7 @@ export const RECIPES: Recipe[] = [
     name: "Carrot Cake",
     ingredients: "2 plátanos maduros, 240 g de copos de avena, 1 zanahoria rallada, 40 g de nueces troceadas, 90 g de proteína en polvo (opcional), 1 cucharadita de canela, 1 cucharadita de levadura, 400 ml de leche vegetal.",
     instructions: "Mezclar todo. Hornear 12 min a 180 grados. Enfriar 2 horas. Cubrir con yogur y nueces.",
-    image: "🍰",
+    image: "https://i.ibb.co/MDYqQr10/1768122791991.png",
     type: "fresco"
   },
   {
