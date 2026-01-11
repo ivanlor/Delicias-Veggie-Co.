@@ -110,7 +110,7 @@ export const RECIPES: Recipe[] = [
     name: "No Pulpo A Feira",
     ingredients: "Setas Shitake, alga Nori, patatas, aove y pimentón dulce y picante.",
     instructions: "Cocer setas en agua con alga Nori. Servir con pimentón al gusto, alga Nori muy picada, aove y sal. Acompañar con patatas cocidas.",
-    image: "🐙",
+    image: "https://i.ibb.co/fYNS0g5Y/1768152564339.png",
     type: "caliente"
   },
   {
