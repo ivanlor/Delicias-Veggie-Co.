@@ -190,7 +190,7 @@ export const RECIPES: Recipe[] = [
     name: "Fingers",
     ingredients: "Garbanzos, Panko, Avena, especias.",
     instructions: "Triturar garbanzos con avena y especias. Formar dedos, rebozar en panko y freír hasta que estén crujientes.",
-    image: "🍗",
+    image: "https://i.ibb.co/0V1yQGzD/1768151262981.png",
     type: "caliente"
   },
   {
