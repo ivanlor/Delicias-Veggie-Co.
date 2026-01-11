@@ -173,7 +173,7 @@ export const RECIPES: Recipe[] = [
     id: 22,
     name: "Heura al limón",
     ingredients: "Heura, ajo en polvo, pimienta, sal, 200 ml de caldo de verduras, 30 ml de zumo de limón, 30 ml de salsa de soja, media cucharada de jengibre, 1 cucharada de maizena diluida en medio vaso de agua.",
-    instructions: "Dorar Heura con especias. Hacer salsa con caldo, limón, soja, jengibre y maizena diluida. Hervir y añadir la heura.",
+    instructions: "Dorar Heura con especias. Hacer salsa con caldo, limón, soja, jengibre and maizena diluida. Hervir y añadir la heura.",
     image: "🍋",
     type: "caliente"
   },
@@ -198,7 +198,7 @@ export const RECIPES: Recipe[] = [
     name: "Salchichas",
     ingredients: "1 patata cocida, 2 zanahorias cocidas, 400 g de alubias cocidas, 70 g de harina de garbanzo, 100 g de pan rallado, 1 cucharada de ketchup, sal, pimienta 1 chorrito de salsa de soja y aove.",
     instructions: "Chafar verduras cocidas con alubias. Añadir ketchup, harina y pan rallado hasta que sea moldeable. Formar, freír y pincelar con soja.",
-    image: "🌭",
+    image: "https://i.ibb.co/Kp0LjJ5G/1768148631659.png",
     type: "caliente"
   },
   {
