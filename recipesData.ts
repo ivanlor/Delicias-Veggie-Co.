@@ -46,7 +46,7 @@ export const RECIPES: Recipe[] = [
     name: "Patatas Fritas con Heura y Salsa de Zanahoria",
     ingredients: "Patatas, heura, 2 zanahorias, 1 cebolla, 2 dientes de ajo, media pastilla de caldo de verduras y aove.",
     instructions: "Heura y patatas se fríen en airfryer. En una sartén se sofríe el ajo, la cebolla se pica y se echa un minuto después. Se cortan en rodajas y cuando la cebolla esté hecha se hechan las zanahorias. Se echa un vaso de agua hasta que la zanahoria esté cocida. Se echa la media pastilla de caldo de verduras. Todo junto se bate. Salpimentar y echar la Heura para que coja el sabor un par de minutos.",
-    image: "🍟",
+    image: "https://i.ibb.co/VYmZnxjh/1768131071646.png",
     type: "caliente"
   },
   {
@@ -62,7 +62,7 @@ export const RECIPES: Recipe[] = [
     name: "Pizza de Berenjena",
     ingredients: "Harina, levadura, berenjena, mozzarella, queso parmesano, tomate natural, tomate frito y huevo cocido.",
     instructions: "Preparar la masa de pizza, hornear con láminas de berenjena, queso y tomate natural. Lo de siempre.",
-    image: "🍕",
+    image: "https://i.ibb.co/cjQdf5p/1768131469817.png",
     type: "caliente"
   },
   {
@@ -70,7 +70,7 @@ export const RECIPES: Recipe[] = [
     name: "Arroz con Tofu y Zanahorias",
     ingredients: "Arroz, tofu, salsa de soja, 2 zanahorias, ajo, comino y semillas de sésamo.",
     instructions: "Se sofríe ajo y zanahorias y después echar agua, sal y arroz. La noche anterior se seca el tofu cortado por la mitad y luego se corta en láminas. En un táper se echa salsa de soja, uno por uno, ajo en polvo en las láminas, comino y semillas de sésamo. Se cocinan a la plancha hasta que se doren.",
-    image: "🍛",
+    image: "https://i.ibb.co/7d6JPjZy/1768131671222.png",
     type: "caliente"
   },
   {
@@ -102,7 +102,7 @@ export const RECIPES: Recipe[] = [
     name: "NO Calamares a la Romana",
     ingredients: "Setas Ostreatus, harina, huevo, gaseosa, alga nori y limón.",
     instructions: "Se bate el huevo, se pica alga Nori y se mezcla la gaseosa. Pasar cada seta por el huevo, luego harina y freír. Echar limón al servir.",
-    image: "🦑",
+    image: "https://i.ibb.co/0pDPpxfk/1768131907798.png",
     type: "caliente"
   },
   {
@@ -118,7 +118,7 @@ export const RECIPES: Recipe[] = [
     name: "Garbanzos con Espinacas y Tofu",
     ingredients: "Garbanzos, espinacas, tofu, tomate frito, 3 dientes de ajo.",
     instructions: "Cocer espinacas y garbanzos. Sofreír ajo, añadir espinacas y tomate frito. Cocinar unos minutos, mezclar con garbanzos y añadir el tofu frito picado.",
-    image: "🥬",
+    image: "https://i.ibb.co/7tmV8GD0/1768132048124.png",
     type: "caliente"
   },
   {
