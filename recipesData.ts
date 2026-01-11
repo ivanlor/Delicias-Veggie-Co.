@@ -222,7 +222,7 @@ export const RECIPES: Recipe[] = [
     name: "Tortilla Francesa Vegana",
     ingredients: "300 gr de tofu firme o blando, 40 g de maizena, 40 g de harina de garbanzo, 20 g de levadura nutricional, cúrcuma, pimienta negra, cebolla en polvo, 250 ml de agua, 2 g de bicarbonato, sal negra.",
     instructions: "Triturar todos los ingredientes con 250ml de agua. Cocinar en sartén como una tortilla normal.",
-    image: "🍳",
+    image: "https://i.ibb.co/XryZwkVg/Screenshot-20260111-173820-Google.jpg",
     type: "caliente"
   }
 ];
