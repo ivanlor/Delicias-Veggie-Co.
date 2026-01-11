@@ -134,7 +134,7 @@ export const RECIPES: Recipe[] = [
     name: "Seitán con Champiñones",
     ingredients: "Seitán, Champiñones, 2 Dientes de ajo, Vino blanco, un poco de harina.",
     instructions: "Sofreír ajos y champiñones. Añadir seitán en filetes. Echar vino blanco, evaporar alcohol y añadir agua con una cucharada de harina para espesar.",
-    image: "🥩",
+    image: "https://i.ibb.co/GQSgsNDY/1768151630760.png",
     type: "caliente"
   },
   {
