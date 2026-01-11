@@ -6,7 +6,7 @@ export const RECIPES: Recipe[] = [
     name: "Macarrones con Berenjena y Tofu Ahumado",
     ingredients: "Un paquete de tofu ahumado, berenjena, macarrones, nata de soja, pimentón dulce, soja, cebolla en polvo.",
     instructions: "La noche antes se deja el tofu con una cucharada de pimentón, 2 de soja, 1 de cebolla en polvo, 1 de ágave, 2 flis de aceite. Se dora ajo si se tiene, se echa la berenjena cortada en cuartos y luego se echa el tofu, se dora todo un poco y luego se echa un poco de nata. Luego se cuece la pasta.",
-    image: "https://i.ibb.co/bjsHSTXt/Screenshot-20260111-105713-Google.jpg",
+    image: "https://i.ibb.co/yc5dLRKS/1768152111635.png",
     type: "caliente"
   },
   {
