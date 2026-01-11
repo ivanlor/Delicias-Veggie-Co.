@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Recipe } from '../types.ts';
 
@@ -27,7 +28,7 @@ const RecipeModal: React.FC<RecipeModalProps> = ({ recipe, onClose }) => {
           </svg>
         </button>
 
-        <div className="md:w-1/2 h-64 md:h-auto shrink-0 flex items-center justify-center bg-gray-100 border-r border-gray-100 p-4">
+        <div className="md:w-1/2 h-80 md:h-auto shrink-0 flex items-center justify-center bg-gray-100 border-r border-gray-100 overflow-hidden">
           {isEmoji ? (
             <span className="text-[10rem] select-none" role="img" aria-label={recipe.name}>
               {recipe.image}
@@ -36,7 +37,7 @@ const RecipeModal: React.FC<RecipeModalProps> = ({ recipe, onClose }) => {
             <img 
               src={recipe.image} 
               alt={recipe.name} 
-              className="w-full h-full object-contain drop-shadow-xl"
+              className="w-full h-full object-cover md:object-contain drop-shadow-xl"
             />
           )}
         </div>

@@ -22,7 +22,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onView }) => {
         {isFresco ? '❄️ Fresco' : '🔥 Caliente'}
       </div>
 
-      <div className="relative h-64 flex items-center justify-center bg-gray-50 overflow-hidden group-hover:bg-emerald-50/30 transition-colors">
+      <div className="relative h-80 flex items-center justify-center bg-gray-50 overflow-hidden group-hover:bg-emerald-50/30 transition-colors">
         {isEmoji ? (
           <span className="text-8xl transition-transform duration-700 group-hover:scale-125 select-none" role="img" aria-label={recipe.name}>
             {recipe.image}
@@ -31,7 +31,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onView }) => {
           <img 
             src={recipe.image || 'https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&q=80&w=800'} 
             alt={recipe.name} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
           />
         )}
       </div>
