@@ -150,7 +150,7 @@ export const RECIPES: Recipe[] = [
     name: "Fajitas",
     ingredients: "Fajitas, Heura, alubias, tomate natural, tomate frito, aguacate, 1 cebolla, un poco de limón, 1 pimiento, ajo en polvo, comino, pimienta cayena, cilantro, sal.",
     instructions: "Sofreír ajo, cebolla, pimiento y tomate. Añadir alubias y especias. Mezclar con la Heura. Salsa: triturar aguacate, tomate, limón y tomate frito.",
-    image: "🌮",
+    image: "https://i.ibb.co/5gf5Mwzp/1768229670110.png",
     type: "caliente"
   },
   {
