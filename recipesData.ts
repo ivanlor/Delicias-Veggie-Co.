@@ -6,7 +6,7 @@ export const RECIPES: Recipe[] = [
     name: "Macarrones con Berenjena y Tofu Ahumado",
     ingredients: "Un paquete de tofu ahumado, berenjena, macarrones, nata de soja, pimentón dulce, soja, cebolla en polvo.",
     instructions: "La noche antes se deja el tofu con una cucharada de pimentón, 2 de soja, 1 de cebolla en polvo, 1 de ágave, 2 flis de aceite. Se dora ajo si se tiene, se echa la berenjena cortada en cuartos y luego se echa el tofu, se dora todo un poco y luego se echa un poco de nata. Luego se cuece la pasta.",
-    image: "https://i.ibb.co/yc5dLRKS/1768152111635.png",
+    image: "https://i.postimg.cc/Yq8dDnFC/1768152111635.png",
     type: "caliente"
   },
   {
@@ -62,7 +62,7 @@ export const RECIPES: Recipe[] = [
     name: "Pizza de Berenjena",
     ingredients: "Harina, levadura, berenjena, mozzarella, queso parmesano, tomate natural, tomate frito y huevo cocido.",
     instructions: "Preparar la masa de pizza, hornear con láminas de berenjena, queso y tomate natural. Lo de siempre.",
-    image: "https://i.ibb.co/cjQdf5p/1768131469817.png",
+    image: "https://i.postimg.cc/T1xpbcY2/1768131469817.png",
     type: "caliente"
   },
   {
@@ -70,7 +70,7 @@ export const RECIPES: Recipe[] = [
     name: "Arroz con Tofu y Zanahorias",
     ingredients: "Arroz, tofu, salsa de soja, 2 zanahorias, ajo, comino y semillas de sésamo.",
     instructions: "Se sofríe ajo y zanahorias y después echar agua, sal y arroz. La noche anterior se seca el tofu cortado por la mitad y luego se corta en láminas. En un táper se echa salsa de soja, uno por uno, ajo en polvo en las láminas, comino y semillas de sésamo. Se cocinan a la plancha hasta que se doren.",
-    image: "https://i.ibb.co/7d6JPjZy/1768131671222.png",
+    image: "https://i.postimg.cc/6q4GVQC4/1768131671222.png",
     type: "caliente"
   },
   {
@@ -102,7 +102,7 @@ export const RECIPES: Recipe[] = [
     name: "NO Calamares a la Romana",
     ingredients: "Setas Ostreatus, harina, huevo, gaseosa, alga nori y limón.",
     instructions: "Se bate el huevo, se pica alga Nori y se mezcla la gaseosa. Pasar cada seta por el huevo, luego harina y freír. Echar limón al servir.",
-    image: "https://i.ibb.co/0pDPpxfk/1768131907798.png",
+    image: "https://i.postimg.cc/QxRJy2tp/1768131907798.png",
     type: "caliente"
   },
   {
@@ -110,7 +110,7 @@ export const RECIPES: Recipe[] = [
     name: "No Pulpo A Feira",
     ingredients: "Setas Shitake, alga Nori, patatas, aove y pimentón dulce y picante.",
     instructions: "Cocer setas en agua con alga Nori. Servir con pimentón al gusto, alga Nori muy picada, aove y sal. Acompañar con patatas cocidas.",
-    image: "https://i.ibb.co/fYNS0g5Y/1768152564339.png",
+    image: "https://i.postimg.cc/xCJr9rvQ/1768152564339.png",
     type: "caliente"
   },
   {
@@ -118,7 +118,7 @@ export const RECIPES: Recipe[] = [
     name: "Garbanzos con Espinacas y Tofu",
     ingredients: "Garbanzos, espinacas, tofu, tomate frito, 3 dientes de ajo.",
     instructions: "Cocer espinacas y garbanzos. Sofreír ajo, añadir espinacas y tomate frito. Cocinar unos minutos, mezclar con garbanzos y añadir el tofu frito picado.",
-    image: "https://i.ibb.co/7tmV8GD0/1768132048124.png",
+    image: "https://i.postimg.cc/KcfWC8SB/1768132048124.png",
     type: "caliente"
   },
   {
@@ -134,7 +134,7 @@ export const RECIPES: Recipe[] = [
     name: "Seitán con Champiñones",
     ingredients: "Seitán, Champiñones, 2 Dientes de ajo, Vino blanco, un poco de harina.",
     instructions: "Sofreír ajos y champiñones. Añadir seitán en filetes. Echar vino blanco, evaporar alcohol y añadir agua con una cucharada de harina para espesar.",
-    image: "https://i.ibb.co/GQSgsNDY/1768151630760.png",
+    image: "https://i.postimg.cc/d0cZ2v0r/1768151630760.png",
     type: "caliente"
   },
   {
@@ -150,7 +150,7 @@ export const RECIPES: Recipe[] = [
     name: "Fajitas",
     ingredients: "Fajitas, Heura, alubias, tomate natural, tomate frito, aguacate, 1 cebolla, un poco de limón, 1 pimiento, ajo en polvo, comino, pimienta cayena, cilantro, sal.",
     instructions: "Sofreír ajo, cebolla, pimiento y tomate. Añadir alubias y especias. Mezclar con la Heura. Salsa: triturar aguacate, tomate, limón y tomate frito.",
-    image: "https://i.ibb.co/5gf5Mwzp/1768229670110.png",
+    image: "https://i.postimg.cc/Hx4x47Nm/1768229670110.png",
     type: "caliente"
   },
   {
@@ -190,7 +190,7 @@ export const RECIPES: Recipe[] = [
     name: "Fingers",
     ingredients: "Garbanzos, Panko, Avena, especias.",
     instructions: "Triturar garbanzos con avena y especias. Formar dedos, rebozar en panko y freír hasta que estén crujientes.",
-    image: "https://i.ibb.co/0V1yQGzD/1768151262981.png",
+    image: "https://i.postimg.cc/RZdqHt2j/1768151262981.png",
     type: "caliente"
   },
   {
@@ -198,7 +198,7 @@ export const RECIPES: Recipe[] = [
     name: "Salchichas",
     ingredients: "1 patata cocida, 2 zanahorias cocidas, 400 g de alubias cocidas, 70 g de harina de garbanzo, 100 g de pan rallado, 1 cucharada de ketchup, sal, pimienta 1 chorrito de salsa de soja y aove.",
     instructions: "Chafar verduras cocidas con alubias. Añadir ketchup, harina y pan rallado hasta que sea moldeable. Formar, freír y pincelar con soja.",
-    image: "https://i.ibb.co/Kp0LjJ5G/1768148631659.png",
+    image: "https://i.postimg.cc/hPrKyBMz/1768148631659.png",
     type: "caliente"
   },
   {
@@ -223,6 +223,14 @@ export const RECIPES: Recipe[] = [
     ingredients: "300 gr de tofu firme o blando, 40 g de maizena, 40 g de harina de garbanzo, 20 g de levadura nutricional, cúrcuma, pimienta negra, cebolla en polvo, 250 ml de agua, 2 g de bicarbonato, sal negra.",
     instructions: "Triturar todos los ingredientes con 250ml de agua. Cocinar en sartén como una tortilla normal.",
     image: "https://i.ibb.co/XryZwkVg/Screenshot-20260111-173820-Google.jpg",
+    type: "caliente"
+  },
+  {
+    id: 29,
+    name: "Porridge",
+    ingredients: "500 ml de leche vegetal, 200 g de copos de avena, un puñado de arándanos, un plátano, frutos secos y canela",
+    instructions: "En un cazo verter leche y la avena y remover continuamente hasta que se espese un poco. Después emplatar con el resto de ingredientes.",
+    image: "https://i.postimg.cc/ZnrCHTT5/1768342089609.png",
     type: "caliente"
   }
 ];

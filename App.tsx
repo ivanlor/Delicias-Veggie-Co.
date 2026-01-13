@@ -2,19 +2,43 @@ import React, { useState, useMemo } from 'react';
 import Header from './components/Header.tsx';
 import RecipeCard from './components/RecipeCard.tsx';
 import RecipeModal from './components/RecipeModal.tsx';
-import { RECIPES } from './recipesData.ts';
+import AssistantChat from './components/AssistantChat.tsx';
+import RecipeFormModal from './components/RecipeFormModal.tsx';
+import SettingsModal from './components/SettingsModal.tsx';
+import { RECIPES as INITIAL_RECIPES } from './recipesData.ts';
 import { Recipe } from './types.ts';
+import { syncToGoogleSheets } from './services/sheetsService.ts';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [recipes, setRecipes] = useState<Recipe[]>(INITIAL_RECIPES);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const filteredRecipes = useMemo(() => {
-    return RECIPES.filter(recipe => 
+    return recipes.filter(recipe => 
       recipe.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       recipe.ingredients.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [searchTerm]);
+  }, [searchTerm, recipes]);
+
+  const handleAddRecipe = async (newRecipeData: Partial<Recipe>) => {
+    const newRecipe: Recipe = {
+      id: Date.now(),
+      name: newRecipeData.name || 'Nueva Receta',
+      ingredients: newRecipeData.ingredients || '',
+      instructions: newRecipeData.instructions || '',
+      image: newRecipeData.image || '🍲',
+      type: (newRecipeData.type as 'fresco' | 'caliente') || 'caliente'
+    };
+
+    setRecipes(prev => [newRecipe, ...prev]);
+    setIsFormOpen(false);
+    
+    // Sincronizar con Google Sheets
+    await syncToGoogleSheets({ recipe: newRecipe, action: 'create' });
+  };
 
   return (
     <div className="min-h-screen bg-[#d8dad0] flex flex-col selection:bg-emerald-100 selection:text-emerald-900 transition-colors duration-500">
@@ -22,7 +46,7 @@ const App: React.FC = () => {
       
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <section className="mb-16">
-          <div className="max-w-xl mx-auto">
+          <div className="max-w-xl mx-auto flex flex-col gap-6">
             <div className="relative group">
               <div className="absolute inset-0 bg-emerald-100 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
               <input 
@@ -32,6 +56,28 @@ const App: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+            </div>
+            
+            <div className="flex justify-center gap-4">
+              <button 
+                onClick={() => setIsFormOpen(true)}
+                className="bg-white px-6 py-3 rounded-2xl text-emerald-700 font-bold shadow-sm hover:shadow-md border border-emerald-50 transition-all flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Nueva Receta
+              </button>
+              <button 
+                onClick={() => setIsSettingsOpen(true)}
+                className="bg-white/50 px-6 py-3 rounded-2xl text-gray-600 font-bold shadow-sm hover:bg-white transition-all flex items-center gap-2 border border-gray-100"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Google Sheets
+              </button>
             </div>
           </div>
         </section>
@@ -56,6 +102,20 @@ const App: React.FC = () => {
       </main>
 
       <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
+      
+      {isFormOpen && (
+        <RecipeFormModal 
+          recipe={null} 
+          onClose={() => setIsFormOpen(false)} 
+          onSave={handleAddRecipe} 
+        />
+      )}
+
+      {isSettingsOpen && (
+        <SettingsModal onClose={() => setIsSettingsOpen(false)} />
+      )}
+
+      <AssistantChat onAddRecipe={handleAddRecipe} />
     </div>
   );
 };
