@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface SettingsModalProps {
@@ -103,7 +102,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                 </div>
                 <div className="flex items-center gap-4 bg-red-50 border border-red-100 p-4 rounded-2xl">
                   <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-black">3</div>
-                  <p className="text-xs text-red-800 font-black italic">Implementar -> Gestionar -> Editar -> <b>NUEVA VERSIÓN</b>.</p>
+                  <p className="text-xs text-red-800 font-black italic">Implementar &rarr; Gestionar &rarr; Editar &rarr; <b>NUEVA VERSIÓN</b>.</p>
                 </div>
               </div>
             </div>
