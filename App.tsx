@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import Header from './components/Header.tsx';
 import RecipeCard from './components/RecipeCard.tsx';
 import RecipeModal from './components/RecipeModal.tsx';
-import AssistantChat from './components/AssistantChat.tsx';
 import RecipeFormModal from './components/RecipeFormModal.tsx';
 import SettingsModal from './components/SettingsModal.tsx';
 import { RECIPES as INITIAL_RECIPES } from './recipesData.ts';
@@ -114,8 +113,6 @@ const App: React.FC = () => {
       {isSettingsOpen && (
         <SettingsModal onClose={() => setIsSettingsOpen(false)} />
       )}
-
-      <AssistantChat onAddRecipe={handleAddRecipe} />
     </div>
   );
 };

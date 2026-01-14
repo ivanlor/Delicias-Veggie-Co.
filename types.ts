@@ -1,4 +1,3 @@
-
 export interface Recipe {
   id: number;
   name: string;
@@ -7,9 +6,4 @@ export interface Recipe {
   category?: string;
   image?: string;
   type?: 'fresco' | 'caliente';
-}
-
-export interface ChatMessage {
-  role: 'user' | 'assistant';
-  content: string;
 }
