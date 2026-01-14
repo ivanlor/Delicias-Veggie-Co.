@@ -1,5 +1,4 @@
-
-import { Recipe } from "../types";
+import { Recipe } from "../types.ts";
 
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxmwoIanCHW0l0bjuiuC6pHAW9meQJAlEMdeDu_6H3oKugIh1sP4UIDo0KIi8NKEXTCCQ/exec';
 
