@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import Header from './components/Header.tsx';
-import RecipeCard from './components/RecipeCard.tsx';
-import RecipeModal from './components/RecipeModal.tsx';
-import RecipeFormModal from './components/RecipeFormModal.tsx';
-import SettingsModal from './components/SettingsModal.tsx';
-import { RECIPES as INITIAL_RECIPES } from './recipesData.ts';
-import { Recipe } from './types.ts';
-import { syncToGoogleSheets } from './services/sheetsService.ts';
+import Header from './components/Header';
+import RecipeCard from './components/RecipeCard';
+import RecipeModal from './components/RecipeModal';
+import RecipeFormModal from './components/RecipeFormModal';
+import SettingsModal from './components/SettingsModal';
+import { RECIPES as INITIAL_RECIPES } from './recipesData';
+import { Recipe } from './types';
+import { syncToGoogleSheets } from './services/sheetsService';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');

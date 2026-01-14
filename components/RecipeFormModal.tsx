@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Recipe } from '../types.ts';
+import { Recipe } from '../types';
 
 interface RecipeFormModalProps {
   recipe: Recipe | null;
