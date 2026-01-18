@@ -3,7 +3,6 @@ import Header from './components/Header';
 import RecipeCard from './components/RecipeCard';
 import RecipeModal from './components/RecipeModal';
 import RecipeFormModal from './components/RecipeFormModal';
-import SettingsModal from './components/SettingsModal';
 import { RECIPES as INITIAL_RECIPES } from './recipesData';
 import { Recipe } from './types';
 import { syncToGoogleSheets } from './services/sheetsService';
@@ -13,7 +12,6 @@ const App: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>(INITIAL_RECIPES);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const filteredRecipes = useMemo(() => {
     return recipes.filter(recipe => 
@@ -35,7 +33,7 @@ const App: React.FC = () => {
     setRecipes(prev => [newRecipe, ...prev]);
     setIsFormOpen(false);
     
-    // Sincronizar con Google Sheets
+    // Sincronizar con Google Sheets (el webhook sigue configurado internamente)
     await syncToGoogleSheets({ recipe: newRecipe, action: 'create' });
   };
 
@@ -43,7 +41,6 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#d8dad0] flex flex-col selection:bg-emerald-100 selection:text-emerald-900 transition-colors duration-500">
       <Header 
         onNewRecipe={() => setIsFormOpen(true)} 
-        onOpenSettings={() => setIsSettingsOpen(true)} 
       />
       
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -92,10 +89,6 @@ const App: React.FC = () => {
           onClose={() => setIsFormOpen(false)} 
           onSave={handleAddRecipe} 
         />
-      )}
-
-      {isSettingsOpen && (
-        <SettingsModal onClose={() => setIsSettingsOpen(false)} />
       )}
     </div>
   );
