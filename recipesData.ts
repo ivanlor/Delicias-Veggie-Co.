@@ -2,6 +2,14 @@ import { Recipe } from './types';
 
 export const RECIPES: Recipe[] = [
   {
+    id: 30,
+    name: "Alitas de coliflor (estilo búfalo)",
+    ingredients: "1 coliflor mediana, 1 taza de harina (trigo, avena o garbanzo), 1 taza de leche vegetal o agua, 2 cucharadas de maicena, ajo en polvo, cebolla en polvo, pimentón, sal y pimienta. Salsa Buffalo: salsa picante, mantequilla vegana, vinagre de manzana o limón.",
+    instructions: "1. Mezcla harina, maicena y especias con leche vegetal hasta tener una masa espesa. 2. Reboza los ramilletes de coliflor y hornea a 200°C por 20 min (o 15 min en airfryer a 190°C). 3. Mientras tanto, mezcla la salsa picante con la mantequilla derretida y el vinagre. 4. Saca la coliflor, glasea con la salsa y hornea 10 min más para que caramelice.",
+    image: "https://thumbs2.imgbox.com/85/fb/K4tR1TmO_t.jpg",
+    type: "caliente"
+  },
+  {
     id: 1,
     name: "Macarrones con Berenjena y Tofu Ahumado",
     ingredients: "Un paquete de tofu ahumado, berenjena, macarrones, nata de soja, pimentón dulce, soja, cebolla en polvo.",
