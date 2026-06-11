@@ -1,0 +1,51 @@
+{
+  "entities": {
+    "Recipe": {
+      "title": "Recipe",
+      "description": "A vegan or vegetarian recipe",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ingredients": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["fresco", "caliente"]
+        },
+        "userId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "name", "ingredients", "instructions", "userId"]
+    }
+  },
+  "firestore": {
+    "recipes/{recipeId}": {
+      "schema": "Recipe",
+      "description": "Collection of user-created recipes"
+    }
+  }
+}

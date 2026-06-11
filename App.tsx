@@ -3,10 +3,17 @@ import Header from './components/Header';
 import RecipeCard from './components/RecipeCard';
 import RecipeModal from './components/RecipeModal';
 import RecipeFormModal from './components/RecipeFormModal';
-import SettingsModal from './components/SettingsModal';
 import { RECIPES as INITIAL_RECIPES } from './recipesData';
 import { Recipe } from './types';
-import { syncToGoogleSheets } from './services/sheetsService';
+import { 
+  auth, 
+  loginWithGoogle, 
+  logoutUser, 
+  fetchRecipesFromCloud, 
+  saveRecipeToCloud, 
+  deleteRecipeFromCloud 
+} from './services/firebaseService';
+import { onAuthStateChanged, User } from 'firebase/auth';
 
 interface Toast {
   id: string;
@@ -16,8 +23,10 @@ interface Toast {
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [user, setUser] = useState<User | null>(null);
+  const [loadingCloud, setLoadingCloud] = useState(false);
   
-  // Carga inicial persistente desde localStorage o caida en INITIAL_RECIPES
+  // Local state for recipes
   const [recipes, setRecipes] = useState<Recipe[]>(() => {
     const saved = localStorage.getItem('delicias_recipes_v2');
     if (saved) {
@@ -33,15 +42,9 @@ const App: React.FC = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  // Guardado persistente local ante cualquier cambio en recetas
-  useEffect(() => {
-    localStorage.setItem('delicias_recipes_v2', JSON.stringify(recipes));
-  }, [recipes]);
-
-  // Gestor de notificaciones tipo Toast
+  // Toast manager
   const showToast = (message: string, type: 'success' | 'error' | 'loading', duration = 5000) => {
     const id = Date.now().toString();
     setToasts(prev => [...prev, { id, message, type }]);
@@ -58,6 +61,69 @@ const App: React.FC = () => {
     setToasts(prev => prev.filter(t => t.id !== id));
   };
 
+  // Track Firebase Auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      
+      if (currentUser) {
+        setLoadingCloud(true);
+        const toastId = showToast(`¡Conectado! Sincronizando tus recetas con la nube...`, 'loading');
+        
+        try {
+          // 1. Fetch recipes already in the cloud
+          const cloudRecipes = await fetchRecipesFromCloud(currentUser.uid);
+          
+          if (cloudRecipes.length === 0) {
+            // First time logging in or cloud is empty: Let's back up the current local recipes to the cloud!
+            const backupToastId = showToast(`Subiendo tus recetas locales a tu nueva nube personal...`, 'loading');
+            
+            for (const recipe of recipes) {
+              await saveRecipeToCloud(recipe, currentUser.uid);
+            }
+            
+            dismissToast(backupToastId);
+            // Re-fetch to guarantee complete sync
+            const syncedRecipes = await fetchRecipesFromCloud(currentUser.uid);
+            setRecipes(syncedRecipes);
+            showToast(`¡Toda tu lista de recetas quedó guardada con éxito en la nube! 🚀`, 'success');
+          } else {
+            // Cloud has data: replace local list with the cloud data
+            setRecipes(cloudRecipes);
+            showToast(`Recetas cargadas desde tu cuenta en la nube correctamente. ✨`, 'success');
+          }
+        } catch (error) {
+          console.error("Error synchronizing with cloud on auth change:", error);
+          showToast(`No se pudieron sincronizar las recetas con la nube.`, 'error');
+        } finally {
+          dismissToast(toastId);
+          setLoadingCloud(false);
+        }
+      } else {
+        // Logged out: re-load from local storage or defaults
+        const saved = localStorage.getItem('delicias_recipes_v2');
+        if (saved) {
+          try {
+            setRecipes(JSON.parse(saved));
+          } catch (e) {
+            setRecipes(INITIAL_RECIPES);
+          }
+        } else {
+          setRecipes(INITIAL_RECIPES);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user === null]); // Keep subscription alive but stable
+
+  // Auto-save local changes only when NOT logged in to preserve different states
+  useEffect(() => {
+    if (!user) {
+      localStorage.setItem('delicias_recipes_v2', JSON.stringify(recipes));
+    }
+  }, [recipes, user]);
+
   const filteredRecipes = useMemo(() => {
     return recipes.filter(recipe => 
       recipe.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -65,10 +131,33 @@ const App: React.FC = () => {
     );
   }, [searchTerm, recipes]);
 
-  // Guardar receta (Soporta creación y edición)
+  const handleLogin = async () => {
+    const toastId = showToast("Iniciando sesión con Google...", "loading");
+    try {
+      await loginWithGoogle();
+      dismissToast(toastId);
+    } catch (error) {
+      dismissToast(toastId);
+      showToast("Hubo un error al iniciar sesión con Google.", "error");
+    }
+  };
+
+  const handleLogout = async () => {
+    const toastId = showToast("Cerrando sesión...", "loading");
+    try {
+      await logoutUser();
+      dismissToast(toastId);
+      showToast("Sesión cerrada. Volviendo al modo local offline.", "success");
+    } catch (error) {
+      dismissToast(toastId);
+      showToast("Error al cerrar sesión.", "error");
+    }
+  };
+
+  // Save recipe (Supports Create and Edit)
   const handleSaveRecipe = async (recipeData: Partial<Recipe>) => {
     if (editingRecipe) {
-      // MODO EDICIÓN
+      // EDIT MODE
       const updatedRecipe: Recipe = {
         ...editingRecipe,
         name: recipeData.name || editingRecipe.name,
@@ -78,11 +167,8 @@ const App: React.FC = () => {
         type: recipeData.type || editingRecipe.type,
       };
 
-      const oldName = editingRecipe.name;
-      
       setRecipes(prev => prev.map(r => r.id === editingRecipe.id ? updatedRecipe : r));
       
-      // Si el modal detallado estaba abierto para esta receta, refrescarlo
       if (selectedRecipe && selectedRecipe.id === editingRecipe.id) {
         setSelectedRecipe(updatedRecipe);
       }
@@ -90,18 +176,21 @@ const App: React.FC = () => {
       setEditingRecipe(null);
       setIsFormOpen(false);
 
-      // Sincronización en segundo plano con Toast informativo
-      const toastId = showToast(`Actualizando "${updatedRecipe.name}" en Excel...`, 'loading');
-      const res = await syncToGoogleSheets({ recipe: updatedRecipe, action: 'update', oldName });
-      dismissToast(toastId);
+      if (user) {
+        const toastId = showToast(`Actualizando "${updatedRecipe.name}" en la nube...`, 'loading');
+        const res = await saveRecipeToCloud(updatedRecipe, user.uid);
+        dismissToast(toastId);
 
-      if (res.success) {
-        showToast(`¡"${updatedRecipe.name}" sincronizada en Excel correctamente!`, 'success');
+        if (res.success) {
+          showToast(`¡"${updatedRecipe.name}" actualizada en la nube! ✅`, 'success');
+        } else {
+          showToast(`Guardado en local. No se guardará en otros dispositivos temporalmente.`, 'error');
+        }
       } else {
-        showToast(`Guardado en local. No se pudo conectar con el Excel.`, 'error');
+        showToast(`¡"${updatedRecipe.name}" modificada localmente!`, 'success');
       }
     } else {
-      // MODO CREACIÓN (ALTA)
+      // CREATE MODE (ALTA)
       const newRecipe: Recipe = {
         id: Date.now(),
         name: recipeData.name || 'Nueva Receta',
@@ -114,37 +203,43 @@ const App: React.FC = () => {
       setRecipes(prev => [newRecipe, ...prev]);
       setIsFormOpen(false);
 
-      // Sincronización en segundo plano con Toast informativo
-      const toastId = showToast(`Creando "${newRecipe.name}" en Excel...`, 'loading');
-      const res = await syncToGoogleSheets({ recipe: newRecipe, action: 'create' });
-      dismissToast(toastId);
+      if (user) {
+        const toastId = showToast(`Sincronizando "${newRecipe.name}" con la nube...`, 'loading');
+        const res = await saveRecipeToCloud(newRecipe, user.uid);
+        dismissToast(toastId);
 
-      if (res.success) {
-        showToast(`¡"${newRecipe.name}" guardada en Excel correctamente!`, 'success');
+        if (res.success) {
+          showToast(`¡"${newRecipe.name}" guardada en la nube! Accede desde cualquier dispositivo. 🚀`, 'success');
+        } else {
+          showToast(`Guardada únicamente en tu dispositivo actual. Intenta re-conectar.`, 'error');
+        }
       } else {
-        showToast(`Guardada en local. No se pudo conectar con el Excel.`, 'error');
+        showToast(`¡"${newRecipe.name}" guardada localmente!`, 'success');
       }
     }
   };
 
-  // Eliminar receta
+  // Delete recipe
   const handleDeleteRecipe = async (recipeToDelete: Recipe) => {
     setRecipes(prev => prev.filter(r => r.id !== recipeToDelete.id));
     setSelectedRecipe(null);
 
-    // Sincronización en segundo plano con Toast informativo
-    const toastId = showToast(`Eliminando "${recipeToDelete.name}" de Excel...`, 'loading');
-    const res = await syncToGoogleSheets({ recipe: recipeToDelete, action: 'delete' });
-    dismissToast(toastId);
+    if (user) {
+      const toastId = showToast(`Borrando de la nube...`, 'loading');
+      const res = await deleteRecipeFromCloud(recipeToDelete.id, user.uid);
+      dismissToast(toastId);
 
-    if (res.success) {
-      showToast(`¡"${recipeToDelete.name}" eliminada de Excel con éxito!`, 'success');
+      if (res.success) {
+        showToast(`¡"${recipeToDelete.name}" eliminada de la nube con éxito!`, 'success');
+      } else {
+        showToast(`Eliminada localmente, pero falló la sincronización con la nube.`, 'error');
+      }
     } else {
-      showToast(`Eliminada localmente. No se pudo conectar con el Excel.`, 'error');
+      showToast(`¡"${recipeToDelete.name}" eliminada de este dispositivo!`, 'success');
     }
   };
 
-  // Activa la pantalla de edición desde la vista de detalle de receta
+  // For editing inside detail modal
   const handleTriggerEdit = (recipeToEdit: Recipe) => {
     setEditingRecipe(recipeToEdit);
     setIsFormOpen(true);
@@ -157,12 +252,36 @@ const App: React.FC = () => {
           setEditingRecipe(null);
           setIsFormOpen(true);
         }} 
-        onOpenSettings={() => setIsSettingsOpen(true)}
+        user={user}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
       />
       
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        {/* Offline / Non-authenticated Friendly Banner */}
+        {!user && (
+          <div className="mb-8 max-w-4xl mx-auto bg-amber-50 border border-amber-200/80 rounded-3xl p-5 flex flex-col sm:flex-row shadow-sm gap-4 items-center justify-between animate-in slide-in-from-top duration-500">
+            <div className="flex items-center gap-3.5 text-center sm:text-left">
+              <span className="text-3xl select-none">👋</span>
+              <div>
+                <h4 className="font-extrabold text-slate-800 text-sm sm:text-base">¿Deseas guardar tus recetas en la nube?</h4>
+                <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                  Inicia sesión con Google usando el botón <b>Nube</b> para acceder desde tus otros dispositivos.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={handleLogin}
+              className="bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-2xl shadow-sm transition-all shrink-0 uppercase tracking-wider"
+              id="btn-banner-login"
+            >
+              Conectarse Ahora
+            </button>
+          </div>
+        )}
+
         {/* Search Section */}
-        <section className="mb-16">
+        <section className="mb-12">
           <div className="max-w-xl mx-auto">
             <div className="relative group">
               <div className="absolute inset-0 bg-emerald-100 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
@@ -189,7 +308,7 @@ const App: React.FC = () => {
         </div>
         
         {filteredRecipes.length === 0 && (
-          <div className="text-center py-40">
+          <div className="text-center py-40 animate-in fade-in duration-700">
             <span className="text-9xl mb-8 block animate-pulse">🍲</span>
             <p className="text-gray-500 font-black text-2xl uppercase tracking-widest">Receta no encontrada</p>
             <p className="text-gray-400 mt-4 italic">Prueba con otros ingredientes o nombres</p>
@@ -216,11 +335,7 @@ const App: React.FC = () => {
         />
       )}
 
-      {isSettingsOpen && (
-        <SettingsModal onClose={() => setIsSettingsOpen(false)} />
-      )}
-
-      {/* Panel Flotante de Notificaciones Toast */}
+      {/* Toast floating notifications panel */}
       <div className="fixed top-24 right-6 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none">
         {toasts.map(toast => (
           <div 

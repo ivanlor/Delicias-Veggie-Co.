@@ -1,14 +1,20 @@
 import React from 'react';
-import { Settings, Plus } from 'lucide-react';
+import { Plus, Cloud, LogOut, User } from 'lucide-react';
 
 interface HeaderProps {
   onNewRecipe: () => void;
-  onOpenSettings: () => void;
+  user: {
+    displayName: string | null;
+    email: string | null;
+    photoURL: string | null;
+  } | null;
+  onLogin: () => void;
+  onLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNewRecipe, onOpenSettings }) => {
+const Header: React.FC<HeaderProps> = ({ onNewRecipe, user, onLogin, onLogout }) => {
   return (
-    <header className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm">
+    <header className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm animate-in fade-in duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo Section */}
@@ -27,23 +33,51 @@ const Header: React.FC<HeaderProps> = ({ onNewRecipe, onOpenSettings }) => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-4">
-            <button 
-              onClick={onOpenSettings}
-              className="bg-slate-50 text-slate-700 p-2 sm:px-4 sm:py-2 rounded-xl font-semibold hover:bg-slate-100 transition-all flex items-center gap-2 border border-slate-200 shadow-sm text-sm"
-              title="Configuración de Excel"
-              id="btn-excel-settings"
-            >
-              <Settings className="h-4 w-4" />
-              <span className="hidden sm:inline">Ajustes Excel</span>
-            </button>
+            {user ? (
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 pl-2 pr-3 py-1.5 rounded-2xl text-xs sm:text-sm font-semibold text-slate-700">
+                {user.photoURL ? (
+                  <img 
+                    src={user.photoURL} 
+                    alt={user.displayName || "Avatar"} 
+                    className="w-8 h-8 rounded-full border border-emerald-500 shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                    <User className="h-4 w-4" />
+                  </div>
+                )}
+                <span className="hidden md:inline max-w-[120px] truncate">{user.displayName || user.email}</span>
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse ml-1" title="Sincronizado en la Nube"></span>
+                <button 
+                  onClick={onLogout}
+                  className="ml-2 hover:text-rose-600 transition-colors p-1"
+                  title="Cerrar sesión"
+                  id="btn-logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={onLogin}
+                className="bg-slate-900 text-white px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl font-semibold hover:bg-slate-800 transition-all flex items-center gap-2 border border-slate-900 shadow-sm text-xs sm:text-sm"
+                title="Sincronizar con Google"
+                id="btn-login"
+              >
+                <Cloud className="h-4 w-4 text-emerald-400" />
+                <span>Nube</span>
+              </button>
+            )}
+
             <button 
               onClick={onNewRecipe}
-              className="bg-emerald-600 text-white p-2 sm:px-4 sm:py-2 rounded-xl font-bold hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-md shadow-emerald-100 text-sm"
+              className="bg-emerald-600 text-white px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl font-bold hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-md shadow-emerald-100 text-xs sm:text-sm"
               title="Añadir nueva receta"
               id="btn-new-recipe"
             >
               <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">Nueva Receta</span>
+              <span>Nueva Receta</span>
             </button>
           </div>
         </div>
