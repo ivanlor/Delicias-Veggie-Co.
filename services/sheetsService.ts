@@ -1,7 +1,5 @@
 import { Recipe } from "../types";
 
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxmwoIanCHW0l0bjuiuC6pHAW9meQJAlEMdeDu_6H3oKugIh1sP4UIDo0KIi8NKEXTCCQ/exec';
-
 export type SheetAction = 'create' | 'update' | 'delete';
 
 interface SyncParams {
@@ -11,25 +9,33 @@ interface SyncParams {
 }
 
 export const syncToGoogleSheets = async ({ recipe, action, oldName }: SyncParams) => {
+  // Intentar cargar la url personalizada del localStorage, si no usar el fallback por defecto
+  const customUrl = localStorage.getItem('delicias_webhook_url');
+  const WEBHOOK_URL = customUrl || 'https://script.google.com/macros/s/AKfycbzDxWBp66FKrCzIbAPyV-L0vzfBYwJ3TybwkmPQXanlHNfSjkYcPMwCuyFL9b2uDj9t/exec';
+
   try {
+    const payload = {
+      action,
+      oldName: oldName || recipe.name, // Clave para buscar la fila
+      name: recipe.name,
+      type: recipe.type,
+      ingredients: recipe.ingredients,
+      instructions: recipe.instructions
+    };
+
+    console.log(`Enviando a Sheets (${action}):`, payload);
+
     await fetch(WEBHOOK_URL, {
       method: 'POST',
       mode: 'no-cors',
       cache: 'no-cache',
-      body: JSON.stringify({
-        action,
-        oldName: oldName || recipe.name, // Clave para buscar la fila
-        name: recipe.name,
-        type: recipe.type,
-        ingredients: recipe.ingredients,
-        instructions: recipe.instructions
-      }),
+      body: JSON.stringify(payload),
     });
 
-    console.log(`Sincronizado: ${action} -> ${recipe.name}`);
+    console.log(`Sincronizado correctamente usando link: ${WEBHOOK_URL}`);
     return { success: true };
   } catch (error) {
-    console.error(`Error de sincronización:`, error);
+    console.error(`Error de sincronización con Google Sheets:`, error);
     return { success: false };
   }
 };
