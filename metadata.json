@@ -1,5 +1,6 @@
 {
   "name": "Delicias Veggie & Co.",
   "description": "Una aplicación moderna de recetas centrada en cocina vegetariana y creativa, con asistente inteligente para ayudarte a cocinar mejor.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

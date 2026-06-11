@@ -1,10 +1,12 @@
 import React from 'react';
+import { Settings, Plus } from 'lucide-react';
 
 interface HeaderProps {
   onNewRecipe: () => void;
+  onOpenSettings: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNewRecipe }) => {
+const Header: React.FC<HeaderProps> = ({ onNewRecipe, onOpenSettings }) => {
   return (
     <header className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,13 +28,21 @@ const Header: React.FC<HeaderProps> = ({ onNewRecipe }) => {
           {/* Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-4">
             <button 
-              onClick={onNewRecipe}
-              className="bg-emerald-50 text-emerald-700 p-2 sm:px-4 sm:py-2 rounded-xl font-bold hover:bg-emerald-100 transition-all flex items-center gap-2 border border-emerald-100 shadow-sm text-sm"
-              title="Añadir nueva receta"
+              onClick={onOpenSettings}
+              className="bg-slate-50 text-slate-700 p-2 sm:px-4 sm:py-2 rounded-xl font-semibold hover:bg-slate-100 transition-all flex items-center gap-2 border border-slate-200 shadow-sm text-sm"
+              title="Configuración de Excel"
+              id="btn-excel-settings"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:inline">Ajustes Excel</span>
+            </button>
+            <button 
+              onClick={onNewRecipe}
+              className="bg-emerald-600 text-white p-2 sm:px-4 sm:py-2 rounded-xl font-bold hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-md shadow-emerald-100 text-sm"
+              title="Añadir nueva receta"
+              id="btn-new-recipe"
+            >
+              <Plus className="h-4 w-4" />
               <span className="hidden sm:inline">Nueva Receta</span>
             </button>
           </div>
